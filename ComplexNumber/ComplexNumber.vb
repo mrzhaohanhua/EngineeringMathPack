@@ -8,9 +8,13 @@
         ''' </summary>
         Cartesian = 0
         ''' <summary>
-        ''' 极坐标形式
+        ''' 极坐标形式，相角为弧度
         ''' </summary>
-        Polar = 1
+        PolarRadian = 1
+        ''' <summary>
+        ''' 极坐标形式，相角为度数
+        ''' </summary>
+        PolarDegree = 2
     End Enum
     Private re_double As Double
     Private im_double As Double
@@ -48,10 +52,10 @@
         End Get
     End Property
     ''' <summary>
-    ''' 复数的相角
+    ''' 复数的相角(弧度)
     ''' </summary>
     ''' <returns></returns>
-    Public Property Phase
+    Public Property PhaseRadian As Double
         Get
             If re_double = 0 And im_double = 0 Then
                 Return 0
@@ -59,12 +63,24 @@
                 Return Math.Atan2(im_double, re_double)
             End If
         End Get
-        Set(value)
+        Set(value As Double)
             Dim r As Double = Modulus
             If r > 0 Then
                 re_double = r * Math.Cos(value)
                 im_double = r * Math.Sin(value)
             End If
+        End Set
+    End Property
+    ''' <summary>
+    ''' 复数的相角(度数)
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property PhaseDegree As Double
+        Get
+            Return PhaseRadian * 180 / Math.PI
+        End Get
+        Set(value As Double)
+            PhaseRadian = value / 180 * Math.PI
         End Set
     End Property
     ''' <summary>
@@ -96,22 +112,22 @@
     ''' 重载构造函数
     ''' </summary>
     ''' <param name="a">参数a：当使用笛卡尔坐标时为复数的实部，当使用极坐标时为复数的模</param>
-    ''' <param name="b">参数b：当使用笛卡尔坐标时为复数的虚部，当使用极坐标时为复数的相角(弧度)</param>
+    ''' <param name="b">参数b：当使用笛卡尔坐标时为复数的虚部，当使用极坐标时为复数的相角</param>
     ''' <param name="plane">坐标形式</param>
     Public Sub New(ByVal a As Double, ByVal b As Double, ByVal plane As ComplexPlane)
-        If plane = ComplexPlane.Cartesian Then
-            re_double = a
-            im_double = b
-        Else
-            If a = 0 Then
-                re_double = 0
-                im_double = 0
-            Else
+        Select Case plane
+            Case ComplexPlane.Cartesian
+                re_double = a
+                im_double = b
+            Case ComplexPlane.PolarRadian
                 a = Math.Abs(a)
                 re_double = a * Math.Cos(b)
                 im_double = a * Math.Sin(b)
-            End If
-        End If
+            Case ComplexPlane.PolarDegree
+                a = Math.Abs(a)
+                re_double = a * Math.Cos(b / 180 * Math.PI)
+                im_double = a * Math.Sin(b / 180 * Math.PI)
+        End Select
     End Sub
     ''' <summary>
     ''' 重载ToString函数
@@ -240,7 +256,7 @@
     ''' <param name="power">指数</param>
     ''' <returns></returns>
     Overloads Shared Operator ^(ByVal base As ComplexNumber, ByVal power As UInteger) As ComplexNumber
-        Return New ComplexNumber(base.Modulus ^ power, base.Phase * power, ComplexPlane.Polar)
+        Return New ComplexNumber(base.Modulus ^ power, base.PhaseRadian * power, ComplexPlane.PolarRadian)
     End Operator
     ''' <summary>
     ''' 计算复数的n次方根，仅取相角最小值
@@ -250,13 +266,13 @@
     ''' <returns></returns>
     Shared Function Root(ByVal number As ComplexNumber, ByVal n As UInteger) As ComplexNumber
         '起始相角
-        Dim start_phase As Double = (number.Phase + Math.PI) Mod （2 * Math.PI）
+        Dim start_phase As Double = (number.PhaseRadian + Math.PI) Mod （2 * Math.PI）
         '当前最小相角
         Dim min_phase As Double = start_phase
         For i As UInteger = 0 To n - 1
             Dim new_phase As Double = ((start_phase + 2 * i * Math.PI) / n) Mod (2 * Math.PI)
             If new_phase < min_phase Then min_phase = new_phase
         Next
-        Return New ComplexNumber(number.Modulus ^ (1 / n), min_phase, ComplexPlane.Polar)
+        Return New ComplexNumber(number.Modulus ^ (1 / n), min_phase, ComplexPlane.PolarRadian)
     End Function
 End Class

@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 '查看程序集特性的值
 
-<Assembly: AssemblyTitle("ConsoleApp1")>
+<Assembly: AssemblyTitle("EngineeringMathPack")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("ConsoleApp1")>
+<Assembly: AssemblyProduct("EngineeringMathPack")>
 <Assembly: AssemblyCopyright("Copyright ©  2021")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
 '如果此项目向 COM 公开，则下列 GUID 用于 typelib 的 ID
-<Assembly: Guid("4567c742-cd47-4757-b16f-79e3d4c1b730")>
+<Assembly: Guid("9ee858f1-22b2-4f54-a1c1-e4983e1dc455")>
 
 ' 程序集的版本信息由下列四个值组成: 
 '

@@ -160,9 +160,9 @@
                     If im_double = 0 Then
                         Return re_double.ToString
                     ElseIf im_double > 0 Then
-                        Return re_double.ToString(format) & "+" & im_double.ToString(format)
+                        Return re_double.ToString(format) & "+" & im_double.ToString(format) & "i"
                     Else
-                        Return re_double.ToString(format) & "-" & Math.Abs(im_double).ToString(format)
+                        Return re_double.ToString(format) & "-" & Math.Abs(im_double).ToString(format) & "i"
                     End If
                 Case ComplexPlane.PolarRadian
                     Return Modulus.ToString(format) & "∠" & (PhaseRadian / Math.PI).ToString(format) & "Pi"

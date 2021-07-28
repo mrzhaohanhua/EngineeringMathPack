@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EngineeringMathPack", "EngineeringMathPack.vbproj", "{93D816A9-6E87-4723-999A-C8279D39800F}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsoleApp1", "..\ConsoleApp1\ConsoleApp1.vbproj", "{A0827168-E2C6-420E-A015-0264E96ACEDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{93D816A9-6E87-4723-999A-C8279D39800F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93D816A9-6E87-4723-999A-C8279D39800F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93D816A9-6E87-4723-999A-C8279D39800F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0827168-E2C6-420E-A015-0264E96ACEDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0827168-E2C6-420E-A015-0264E96ACEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0827168-E2C6-420E-A015-0264E96ACEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0827168-E2C6-420E-A015-0264E96ACEDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
